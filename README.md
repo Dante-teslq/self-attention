@@ -17,7 +17,7 @@ Instalação da dependência:
 pip install numpy
 ```
 
-▶ Instruções de como rodar o código
+# ▶ Instruções de como rodar o código
 
 Clone o repositório:
 ```
