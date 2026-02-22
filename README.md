@@ -31,3 +31,39 @@ Execute o script de teste:
 ```
 python test_attention.py
 ```
+
+# 🧠 Explicação da normalização (Scaling Factor √dₖ)
+
+Após o cálculo do produto escalar entre as matrizes Q × Kᵀ, o resultado é dividido pela raiz quadrada da dimensão das chaves (√dₖ).
+
+Essa normalização evita valores excessivamente altos, reduz a saturação da função softmax e garante uma distribuição adequada dos pesos de atenção.
+
+## 📊 Exemplo de input e output esperado
+Entrada
+```
+Q = [[1, 0],
+     [0, 1]]
+
+K = [[1, 0],
+     [0, 1]]
+
+V = [[1, 2],
+     [3, 4]]
+```
+
+Output esperado (valores aproximados)
+```
+[[1.88 2.88]
+ [2.12 3.12]]
+```
+
+Cada linha do output representa o resultado da atenção aplicada a uma query, combinando os valores da matriz V de acordo com os pesos calculados pelo mecanismo de Self-Attention.
+
+## 📂 Estrutura do repositório
+```
+.
+├── attention.py
+├── test_attention.py
+├── requirements.txt
+└── README.md
+```
