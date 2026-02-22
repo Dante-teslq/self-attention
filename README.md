@@ -15,17 +15,19 @@ Instalação da dependência:
 
 ```bash
 pip install numpy
+```
 
 ▶ Instruções de como rodar o código
 
 Clone o repositório:
-
+```
 git clone https://github.com/GLagess/Implementa-o-do-Mecanismo-de-Self-Attention.git
-
+```
 Acesse a pasta do projeto:
-
+```
 cd Implementa-o-do-Mecanismo-de-Self-Attention
-
+```
 Execute o script de teste:
-
+```
 python test_attention.py
+```
