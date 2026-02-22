@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scaled Dot-Product Attention — Resultados</title>
+    <style>
+        :root {
+            --bg: #1a1b26;
+            --surface: #24283b;
+            --text: #c0caf5;
+            --accent: #7aa2f7;
+            --green: #9ece6a;
+            --yellow: #e0af68;
+        }
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+        h1 {
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .subtitle { color: var(--yellow); margin-bottom: 2rem; font-size: 0.95rem; }
+        section {
+            background: var(--surface);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        section h2 {
+            color: var(--green);
+            font-size: 1.1rem;
+            margin-top: 0;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 0.5rem;
+        }
+        .formula {
+            background: rgba(0,0,0,0.3);
+            padding: 1rem 1.25rem;
+            border-radius: 8px;
+            font-family: 'Consolas', monospace;
+            font-size: 1rem;
+            margin: 1rem 0;
+            color: var(--yellow);
+        }
+        table.matrix {
+            border-collapse: collapse;
+            margin: 0.5rem 0;
+        }
+        table.matrix td {
+            border: 1px solid rgba(255,255,255,0.15);
+            padding: 0.5rem 0.75rem;
+            text-align: right;
+            font-family: 'Consolas', monospace;
+            font-size: 0.9rem;
+        }
+        table.matrix caption {
+            text-align: left;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--accent);
+        }
+        .step { margin-bottom: 1.25rem; }
+        .step p { margin: 0.25rem 0; font-size: 0.9rem; }
+        .shape { color: var(--yellow); font-size: 0.85rem; }
+        .ok { color: var(--green); margin-top: 1rem; }
+        table.heatmap { border-collapse: collapse; margin: 1rem 0; }
+        table.heatmap td {
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 1rem 1.25rem;
+            text-align: center;
+            font-family: 'Consolas', monospace;
+            font-size: 1rem;
+            min-width: 4rem;
+        }
+        table.heatmap caption {
+            text-align: left;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--accent);
+        }
+    </style>
+</head>
+<body>
+    <h1>Scaled Dot-Product Attention</h1>
+    <p class="subtitle">"Attention Is All You Need" (Vaswani et al., 2017) — Resultados do cálculo</p>
+
+    <section>
+        <h2>Equação</h2>
+        <div class="formula">Attention(Q, K, V) = softmax((Q × K<sup>T</sup>) / √d<sub>k</sub>) × V</div>
+        <p>d<sub>k</sub> = 3 (dimensão das chaves) → escala = √d<sub>k</sub> = 1.7321</p>
+    </section>
+
+    <section>
+        <h2>Entradas</h2>
+        <div class="step">
+            <table class='matrix'>
+<caption>Q (queries) — shape (2, 3)</caption>
+<tr>
+<td>1.000000</td>
+<td>0.000000</td>
+<td>1.000000</td>
+</tr>
+<tr>
+<td>0.000000</td>
+<td>1.000000</td>
+<td>1.000000</td>
+</tr>
+</table>
+            <p class="shape">Shape: (2, 3)</p>
+        </div>
+        <div class="step">
+            <table class='matrix'>
+<caption>K (keys) — shape (2, 3)</caption>
+<tr>
+<td>1.000000</td>
+<td>1.000000</td>
+<td>0.000000</td>
+</tr>
+<tr>
+<td>1.000000</td>
+<td>0.000000</td>
+<td>1.000000</td>
+</tr>
+</table>
+            <p class="shape">Shape: (2, 3)</p>
+        </div>
+        <div class="step">
+            <table class='matrix'>
+<caption>V (values) — shape (2, 2)</caption>
+<tr>
+<td>1.000000</td>
+<td>0.000000</td>
+</tr>
+<tr>
+<td>0.000000</td>
+<td>1.000000</td>
+</tr>
+</table>
+            <p class="shape">Shape: (2, 2)</p>
+        </div>
+    </section>
+
+    <section>
+        <h2>Passos intermediários</h2>
+        <div class="step">
+            <p><strong>1.</strong> Scores = Q × K<sup>T</sup></p>
+            <table class='matrix'>
+<caption>Scores — shape (2, 2)</caption>
+<tr>
+<td>1.000000</td>
+<td>2.000000</td>
+</tr>
+<tr>
+<td>1.000000</td>
+<td>1.000000</td>
+</tr>
+</table>
+        </div>
+        <div class="step">
+            <p><strong>2.</strong> Scores escalados = Scores / √d<sub>k</sub> = Scores / 1.7321</p>
+            <table class='matrix'>
+<caption>Scores escalados</caption>
+<tr>
+<td>0.577350</td>
+<td>1.154701</td>
+</tr>
+<tr>
+<td>0.577350</td>
+<td>0.577350</td>
+</tr>
+</table>
+        </div>
+        <div class="step">
+            <p><strong>3.</strong> Pesos de attention = softmax (por linha)</p>
+            <table class='matrix'>
+<caption>Pesos (soma 1 por linha)</caption>
+<tr>
+<td>0.359543</td>
+<td>0.640457</td>
+</tr>
+<tr>
+<td>0.500000</td>
+<td>0.500000</td>
+</tr>
+</table>
+        </div>
+    </section>
+
+    <section>
+        <h2>Heatmap dos pesos de attention</h2>
+        <p>Visualização dos pesos (quanto mais quente a cor, maior o valor).</p>
+        <table class='heatmap'>
+<caption>Pesos de attention — heatmap</caption>
+<tr>
+<td style='background:rgb(102,96,85);color:#fff'>0.3595</td>
+<td style='background:rgb(167,140,72);color:#fff'>0.6405</td>
+</tr>
+<tr>
+<td style='background:rgb(148,120,78);color:#fff'>0.5000</td>
+<td style='background:rgb(148,120,78);color:#fff'>0.5000</td>
+</tr>
+</table>
+    </section>
+
+    <section>
+        <h2>Saída (Attention)</h2>
+        <div class="step">
+            <p><strong>4.</strong> Saída = Pesos × V</p>
+            <table class='matrix'>
+<caption>Resultado final — shape (2, 2)</caption>
+<tr>
+<td>0.359543</td>
+<td>0.640457</td>
+</tr>
+<tr>
+<td>0.500000</td>
+<td>0.500000</td>
+</tr>
+</table>
+            <p class="shape">Shape: (2, 2)</p>
+        </div>
+        <p class="ok">✓ Validação: shape (seq_len_q, d_v) e valores finitos.</p>
+    </section>
+</body>
+</html>
